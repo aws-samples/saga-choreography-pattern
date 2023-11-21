@@ -1,0 +1,10 @@
+{
+    "name": "@src/ordering",
+    "version": "1.0.0",
+    "main": "index.js",
+    "dependencies": {
+        "@aws-sdk/client-dynamodb": "^3.297.0",
+        "@aws-sdk/util-dynamodb": "^3.297.0",
+        "aws-xray-sdk": "^3.5.0"
+    }
+}
