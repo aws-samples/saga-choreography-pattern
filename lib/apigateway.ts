@@ -3,6 +3,7 @@ import { AuthorizationType, LambdaRestApi, TokenAuthorizer } from "aws-cdk-lib/a
 import { IFunction} from "aws-cdk-lib/aws-lambda";
 import * as lambda from 'aws-cdk-lib/aws-lambda';
 import { Construct } from "constructs";
+import { NagSuppressions } from 'cdk-nag';
 
 interface ApiGatewayProps {
     inventoryService: IFunction,
@@ -21,8 +22,7 @@ export class ApiGateway extends Construct {
         this.createPaymentApi(props.paymentService);
         // Order api
         this.createOrderApi(props.orderService);
-        
-        
+
     }
 
     private createInventoryApi(inventoryService: IFunction) {
@@ -34,7 +34,7 @@ export class ApiGateway extends Construct {
       // PUT /product/{id}
       // DELETE /product/{id}
       const authorizerFn = new lambda.Function(this, 'InventoryAuthorizerFunction', {
-        runtime: lambda.Runtime.NODEJS_14_X,
+        runtime: lambda.Runtime.NODEJS_18_X,
         handler: 'lambdaCodeAuth.handler',
         code: lambda.AssetCode.fromAsset('src')
       });
@@ -68,6 +68,47 @@ export class ApiGateway extends Construct {
       singleProduct.addMethod('GET'); // GET /product/{id}
       singleProduct.addMethod('PUT'); // PUT /product/{id}
       singleProduct.addMethod('DELETE'); // DELETE /product/{id}
+
+      NagSuppressions.addResourceSuppressions(
+        apigw,
+        [
+          {
+            id: 'AwsSolutions-APIG2',
+            reason:
+            "It is by design that validation method is not implemented in this construct so that Users can plug-in their own validation method."
+          },
+          {
+            id: 'AwsSolutions-COG4',
+            reason:
+            "It is by design that Cognito is not chosen for authorisation so that Users can use their own authoriser."
+          },
+          {
+            id: 'AwsSolutions-APIG1',
+            reason:
+            "It is by design that it is left to users to decide on enbaling access logging."
+          },
+          {
+            id: 'AwsSolutions-APIG6',
+            reason:
+            "It is by design that it is left to users to decide if they want to use CloudWatch logging or a custom logging"
+          }
+        ],
+        true
+      )
+
+      NagSuppressions.addResourceSuppressions(
+        authorizerFn,
+        [
+          {
+            id: 'AwsSolutions-IAM4',
+            reason:
+            "Suppress AwsSolutions-IAM4 as per design. Users can implement their own custom policy as per their specific need.",
+            appliesTo: ['Policy::arn:<AWS::Partition>:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole'],
+          },
+        ],
+        true
+      )
+      
     }
 
     private createPaymentApi(paymentService: IFunction) {
@@ -77,7 +118,7 @@ export class ApiGateway extends Construct {
         // DELETE /payment/{userName}
 
         const authorizerFn = new lambda.Function(this, 'PaymentAuthorizerFunction', {
-            runtime: lambda.Runtime.NODEJS_14_X,
+            runtime: lambda.Runtime.NODEJS_18_X,
             handler: 'lambdaCodeAuth.handler',
             code: lambda.AssetCode.fromAsset('src')
         });
@@ -111,6 +152,45 @@ export class ApiGateway extends Construct {
         singleBasket.addMethod('GET');  // GET /payment/{userName}
         singleBasket.addMethod('DELETE'); // DELETE /payment/{userName}
 
+        NagSuppressions.addResourceSuppressions(
+            apigw,
+            [
+              {
+                id: 'AwsSolutions-APIG2',
+                reason:
+                "It is by design that validation method is not implemented in this construct so that Users can plug-in their own validation method."
+              },
+              {
+                id: 'AwsSolutions-COG4',
+                reason:
+                "It is be design that Cognito is not chosen for authorisation so that Users can use their own authoriser."
+              },
+              {
+                id: 'AwsSolutions-APIG1',
+                reason:
+                "It is by design that it is left to users to decide on enbaling access logging."
+              },
+              {
+                id: 'AwsSolutions-APIG6',
+                reason:
+                "It is by design that it is left to users to decide if they want to use CloudWatch logging or a custom logging"
+              }
+            ],
+            true
+        )
+
+        NagSuppressions.addResourceSuppressions(
+          authorizerFn,
+          [
+            {
+              id: 'AwsSolutions-IAM4',
+              reason:
+              "Suppress AwsSolutions-IAM4 as per design. Users can implement their own custom policy as per their specific need.",
+              appliesTo: ['Policy::arn:<AWS::Partition>:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole'],
+            },
+          ],
+          true
+        )
     }
 
     private createOrderApi(orderService: IFunction) {
@@ -119,7 +199,7 @@ export class ApiGateway extends Construct {
 	    // GET /order/{userName}
         // expected request : xxx/order/swn?orderDate=timestamp
         const authorizerFn = new lambda.Function(this, 'OrderAuthorizerFunction', {
-            runtime: lambda.Runtime.NODEJS_14_X,
+            runtime: lambda.Runtime.NODEJS_18_X,
             handler: 'lambdaCodeAuth.handler',
             code: lambda.AssetCode.fromAsset('src')
         });
@@ -151,6 +231,45 @@ export class ApiGateway extends Construct {
         singleOrder.addMethod('GET');  // GET /order/{userName}
             // expected request : xxx/order/swn?orderDate=timestamp
         singleOrder.addMethod('DELETE'); // DEL /order/{userName}
+
+        NagSuppressions.addResourceSuppressions(
+            apigw,
+            [
+              {
+                id: 'AwsSolutions-APIG2',
+                reason:
+                "It is by design that validation method is not implemented in this construct so that Users can plug-in their own validation method."
+              },
+              {
+                id: 'AwsSolutions-COG4',
+                reason:
+                "It is be design that Cognito is not chosen for authorisation so that Users can use their own authoriser."
+              },
+              {
+                id: 'AwsSolutions-APIG1',
+                reason:
+                "It is by design that it is left to users to decide on enbaling access logging."
+              },
+              {
+                id: 'AwsSolutions-APIG6',
+                reason:
+                "It is by design that it is left to users to decide if they want to use CloudWatch logging or a custom logging"
+              }
+            ],
+            true
+        )
+        NagSuppressions.addResourceSuppressions(
+          authorizerFn,
+          [
+            {
+              id: 'AwsSolutions-IAM4',
+              reason:
+              "Suppress AwsSolutions-IAM4 as per design. Users can implement their own custom policy as per their specific need.",
+              appliesTo: ['Policy::arn:<AWS::Partition>:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole'],
+            },
+          ],
+          true
+        )
 
         return singleOrder;
     }

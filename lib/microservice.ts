@@ -3,6 +3,7 @@ import { Runtime, Tracing } from "aws-cdk-lib/aws-lambda";
 import { NodejsFunction, NodejsFunctionProps } from "aws-cdk-lib/aws-lambda-nodejs";
 import { Construct } from "constructs";
 import { join } from "path";
+import { NagSuppressions } from 'cdk-nag';
 
 interface MicroservicesProps {
     inventoryTable: ITable;
@@ -46,7 +47,7 @@ export class Microservices extends Construct {
       runtime: Runtime.NODEJS_18_X,
     }
 
-    // Product microservices lambda function
+    // Inventory microservices lambda function
     const inventoryFunction = new NodejsFunction(this, 'inventoryService', {
       tracing: Tracing.ACTIVE,
       entry: join(__dirname, `/../src/inventory/index.js`),
@@ -55,6 +56,32 @@ export class Microservices extends Construct {
 
     inventoryTable.grantReadWriteData(inventoryFunction); 
     
+    NagSuppressions.addResourceSuppressions(
+      inventoryFunction,
+      [
+        {
+          id: 'AwsSolutions-IAM5',
+          reason:
+          "Suppress AwsSolutions-IAM5 as per design. Users can implement their own custom policy as per their specific need.",
+          appliesTo: ['Resource::*'],
+        },
+      ],
+      true
+    )
+
+    NagSuppressions.addResourceSuppressions(
+      inventoryFunction,
+      [
+        {
+          id: 'AwsSolutions-IAM4',
+          reason:
+          "Suppress AwsSolutions-IAM4 as per design. Users can implement their own custom policy as per their specific need.",
+          appliesTo: ['Policy::arn:<AWS::Partition>:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole'],
+        },
+      ],
+      true
+    )
+
     return inventoryFunction;
   }
 
@@ -82,6 +109,33 @@ export class Microservices extends Construct {
     });
 
     paymentTable.grantReadWriteData(paymentFunction);
+
+    NagSuppressions.addResourceSuppressions(
+      paymentFunction,
+      [
+        {
+          id: 'AwsSolutions-IAM5',
+          reason:
+          "Suppress AwsSolutions-IAM5 as per design. Users can implement their own custom policy as per their specific need.",
+          appliesTo: ['Resource::*'],
+        },
+      ],
+      true
+    )
+
+    NagSuppressions.addResourceSuppressions(
+      paymentFunction,
+      [
+        {
+          id: 'AwsSolutions-IAM4',
+          reason:
+          "Suppress AwsSolutions-IAM4 as per design. Users can implement their own custom policy as per their specific need.",
+          appliesTo: ['Policy::arn:<AWS::Partition>:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole'],
+        },
+      ],
+      true
+    )
+
     return paymentFunction;
   }
 
@@ -112,6 +166,33 @@ export class Microservices extends Construct {
     });
 
     orderTable.grantReadWriteData(orderFunction);
+
+    NagSuppressions.addResourceSuppressions(
+      orderFunction,
+      [
+        {
+          id: 'AwsSolutions-IAM5',
+          reason:
+          "Suppress AwsSolutions-IAM5 as per design. Users can implement their own custom policy as per their specific need.",
+          appliesTo: ['Resource::*'],
+        },
+      ],
+      true
+    )
+
+    NagSuppressions.addResourceSuppressions(
+      orderFunction,
+      [
+        {
+          id: 'AwsSolutions-IAM4',
+          reason:
+          "Suppress AwsSolutions-IAM4 as per design. Users can implement their own custom policy as per their specific need.",
+          appliesTo: ['Policy::arn:<AWS::Partition>:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole'],
+        },
+      ],
+      true
+    )
+
     return orderFunction;
   }
 

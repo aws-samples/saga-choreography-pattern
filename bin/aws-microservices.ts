@@ -2,8 +2,13 @@
 import 'source-map-support/register';
 import * as cdk from 'aws-cdk-lib';
 import { SagaChoreogarphyStack } from '../lib/saga-choreography-stack';
+import { AwsSolutionsChecks } from 'cdk-nag'
+import { Aspects } from 'aws-cdk-lib';
 
 const app = new cdk.App();
+// Add the cdk-nag AwsSolutions Pack with extra verbose logging enabled.
+Aspects.of(app).add(new AwsSolutionsChecks({ verbose: true }))
+
 new SagaChoreogarphyStack(app, 'SagaChoreogarphyStack', {
   /* If you don't specify 'env', this stack will be environment-agnostic.
    * Account/Region-dependent features and context lookups will not work,
