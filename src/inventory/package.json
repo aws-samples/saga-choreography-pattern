@@ -3,7 +3,7 @@
     "version": "1.0.0",
     "main": "index.js",
     "dependencies": {
-        "@aws-sdk/client-dynamodb": "^3.296.0",
+        "@aws-sdk/client-dynamodb": "^3.454.0",
         "@aws-sdk/util-dynamodb": "^3.296.0",
         "aws-xray-sdk": "^3.5.0"
     }
