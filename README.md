@@ -12,9 +12,9 @@ The saga choreography pattern is Event Driven. The saga participants subscribe t
 The source code in this repo provides sample code for implementation of the saga choreography pattern on AWS. Below diagram depicts the architecture created by this source code.
 
 1. It has three microservices, namely - Order, Inventory and Payment services which are implemented as Lambdas.
-2. Each service is exposed through an APIGateway REST endpoint.
-3. Each service has a data store - implemnted as DynamoDB tables.
-4. Each services publishes messages and consumes them on Amazon EventBridge.
+2. Each service is exposed through an Amazon API Gateway REST endpoint.
+3. Each service has a data store - implemented as DynamoDB tables.
+4. Each service publishes messages and consumes them on Amazon EventBridge.
 
 ![Architecture Diagram](architecture.png)
 
@@ -33,7 +33,7 @@ For this walkthrough, you need:
 
 ## Setting up the environment
 
-The CDK code in this repository creates the target architecture as shown in the above diagram. These include IAM roles, REST API on API Gateway, DynamoDB tables, Amazon EventBridge event buses and Lambda functions.
+The CDK code in this repository creates the target architecture as shown in the above diagram. These include IAM roles, REST API on Amazon API Gateway, DynamoDB tables, Amazon EventBridge event buses and Lambda functions.
 
 1. You need an AWS access key ID and secret access key for configuring the AWS Command Line Interface (AWS CLI).
 2. Clone the repo:
