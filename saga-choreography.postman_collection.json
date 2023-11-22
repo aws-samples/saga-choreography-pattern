@@ -1,0 +1,525 @@
+{
+	"info": {
+		"_postman_id": "8049bf1f-3184-43e6-9112-bb8feef0d9c6",
+		"name": "saga-choreography",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "inventory service",
+			"item": [
+				{
+					"name": "product",
+					"request": {
+						"auth": {
+							"type": "apikey",
+							"apikey": [
+								{
+									"key": "key",
+									"value": "AuthorizeToken",
+									"type": "string"
+								},
+								{
+									"key": "value",
+									"value": "abc",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{inventoryEndpoint}}/product",
+							"host": [
+								"{{inventoryEndpoint}}"
+							],
+							"path": [
+								"product"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "product",
+					"request": {
+						"auth": {
+							"type": "apikey",
+							"apikey": [
+								{
+									"key": "key",
+									"value": "AuthorizeToken",
+									"type": "string"
+								},
+								{
+									"key": "value",
+									"value": "abc",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"IPhone XII\",\r\n    \"description\": \"This phone is the company's biggest change to its flagship smartphone in years. It includes a borderless.\",\r\n    \"imageFile\": \"product-1.png\",\r\n    \"category\": \"Phone\",\r\n    \"tag\": \"new product\",\r\n    \"price\": 950.4,\r\n    \"quantity\": 100\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{inventoryEndpoint}}/product",
+							"host": [
+								"{{inventoryEndpoint}}"
+							],
+							"path": [
+								"product"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "product2",
+					"request": {
+						"auth": {
+							"type": "apikey",
+							"apikey": [
+								{
+									"key": "key",
+									"value": "AuthorizeToken",
+									"type": "string"
+								},
+								{
+									"key": "value",
+									"value": "abc",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"Samsung 10\",\r\n    \"description\": \"This phone is the company's biggest change to its flagship smartphone in years. It includes a borderless.\",\r\n    \"imageFile\": \"product-2.png\",\r\n    \"category\": \"Phone\",\r\n    \"price\": 740.4,\r\n    \"quantity\": 200\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{inventoryEndpoint}}/product",
+							"host": [
+								"{{inventoryEndpoint}}"
+							],
+							"path": [
+								"product"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "productById",
+					"request": {
+						"auth": {
+							"type": "apikey",
+							"apikey": [
+								{
+									"key": "key",
+									"value": "AuthorizeToken",
+									"type": "string"
+								},
+								{
+									"key": "value",
+									"value": "abc",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{inventoryEndpoint}}/product/527dd361-dd36-4a73-b334-c6bc6f061ba2",
+							"host": [
+								"{{inventoryEndpoint}}"
+							],
+							"path": [
+								"product",
+								"527dd361-dd36-4a73-b334-c6bc6f061ba2"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "product",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"IPhone XY\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{productEndpoint}}/product/8ccbddad-149c-4421-9c70-2d4f93269bd7",
+							"host": [
+								"{{productEndpoint}}"
+							],
+							"path": [
+								"product",
+								"8ccbddad-149c-4421-9c70-2d4f93269bd7"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "product",
+					"request": {
+						"auth": {
+							"type": "apikey",
+							"apikey": [
+								{
+									"key": "key",
+									"value": "AuthorizeToken",
+									"type": "string"
+								},
+								{
+									"key": "value",
+									"value": "abc",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{productEndpoint}}/product/e0a376c3-bc3b-4831-b14d-aae96358f527",
+							"host": [
+								"{{productEndpoint}}"
+							],
+							"path": [
+								"product",
+								"e0a376c3-bc3b-4831-b14d-aae96358f527"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "payment service",
+			"item": [
+				{
+					"name": "payment",
+					"request": {
+						"auth": {
+							"type": "apikey",
+							"apikey": [
+								{
+									"key": "key",
+									"value": "AuthorizeToken",
+									"type": "string"
+								},
+								{
+									"key": "value",
+									"value": "abc",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{paymentEndpoint}}/payment",
+							"host": [
+								"{{paymentEndpoint}}"
+							],
+							"path": [
+								"payment"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "payment",
+					"request": {
+						"auth": {
+							"type": "apikey",
+							"apikey": [
+								{
+									"key": "key",
+									"value": "AuthorizeToken",
+									"type": "string"
+								},
+								{
+									"key": "value",
+									"value": "abc",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"userName\": \"swn\",\r\n  \"items\": [\r\n    {\r\n      \"quantity\": 2,\r\n      \"color\": \"Red\",\r\n      \"price\": 950,\r\n      \"productId\": \"2266628b-ff81-4a9f-a82d-8c46766aa122\",\r\n      \"productName\": \"IPhone X\"\r\n    },\r\n    {\r\n      \"quantity\": 1,\r\n      \"color\": \"Blue\",\r\n      \"price\": 870,\r\n      \"productId\": \"c4f49ceb-b1d4-4b2b-bbae-31f4e024b9d5\",\r\n      \"productName\": \"Samsung 10\"\r\n    }\r\n  ]\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{paymentEndpoint}}/payment",
+							"host": [
+								"{{paymentEndpoint}}"
+							],
+							"path": [
+								"payment"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "paymentByUserName",
+					"request": {
+						"auth": {
+							"type": "apikey",
+							"apikey": [
+								{
+									"key": "key",
+									"value": "AuthorizeToken",
+									"type": "string"
+								},
+								{
+									"key": "value",
+									"value": "abc",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{paymentEndpoint}}/payment/swn",
+							"host": [
+								"{{paymentEndpoint}}"
+							],
+							"path": [
+								"payment",
+								"swn"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Payment Failure",
+					"request": {
+						"auth": {
+							"type": "apikey",
+							"apikey": [
+								{
+									"key": "key",
+									"value": "AuthorizeToken",
+									"type": "string"
+								},
+								{
+									"key": "value",
+									"value": "abc",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"userName\": \"swn\",\n  \"orderDate\": \"2023-08-18T12:48:18.859Z\",\n  \"items\": [\n    {\n      \"quantity\": 3,\n      \"color\": \"Red\",\n      \"price\": 950,\n      \"productId\": \"31eeb376-9119-417a-b0fa-ecd563f6d8d8\",\n      \"productName\": \"Samsung\"\n    }\n  ]\n}"
+						},
+						"url": {
+							"raw": "{{paymentEndpoint}}/payment/swn",
+							"host": [
+								"{{paymentEndpoint}}"
+							],
+							"path": [
+								"payment",
+								"swn"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "order service",
+			"item": [
+				{
+					"name": "order",
+					"request": {
+						"auth": {
+							"type": "apikey",
+							"apikey": [
+								{
+									"key": "key",
+									"value": "AuthorizeToken",
+									"type": "string"
+								},
+								{
+									"key": "value",
+									"value": "abc",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{orderEndpoint}}/order",
+							"host": [
+								"{{orderEndpoint}}"
+							],
+							"path": [
+								"order"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "orderByUserNameandOrderDate",
+					"request": {
+						"auth": {
+							"type": "apikey",
+							"apikey": [
+								{
+									"key": "key",
+									"value": "AuthorizeToken",
+									"type": "string"
+								},
+								{
+									"key": "value",
+									"value": "abc",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{orderEndpoint}}/order/swn?orderDate=2022-03-31T12:52:23.228Z",
+							"host": [
+								"{{orderEndpoint}}"
+							],
+							"path": [
+								"order",
+								"swn"
+							],
+							"query": [
+								{
+									"key": "orderDate",
+									"value": "2022-03-31T12:52:23.228Z"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Order Failure",
+					"request": {
+						"auth": {
+							"type": "apikey",
+							"apikey": [
+								{
+									"key": "key",
+									"value": "AuthorizeToken",
+									"type": "string"
+								},
+								{
+									"key": "value",
+									"value": "abc",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{orderEndpoint}}/order/swn?orderDate=2023-08-17T06:36:43.025Z",
+							"host": [
+								"{{orderEndpoint}}"
+							],
+							"path": [
+								"order",
+								"swn"
+							],
+							"query": [
+								{
+									"key": "orderDate",
+									"value": "2023-08-17T06:36:43.025Z"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create Order",
+					"request": {
+						"auth": {
+							"type": "apikey",
+							"apikey": [
+								{
+									"key": "key",
+									"value": "AuthorizeToken",
+									"type": "string"
+								},
+								{
+									"key": "value",
+									"value": "abc",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n            \"orderDate\": \"2023-08-18T12:48:18.859Z\",\n            \"totalPrice\": 1820,\n            \"lastName\": \"vaibhav\",\n            \"userName\": \"swn\",\n            \"paymentMethod\": 1,\n            \"address\": \"Delhi\",\n            \"email\": \"vaibh@gmail.com\",\n            \"items\": [\n                {\n                    \"quantity\": 3,\n                    \"color\": \"Red\",\n                    \"productId\": \"31eeb376-9119-417a-b0fa-ecd563f6d8d8\",\n                    \"price\": 950,\n                    \"productName\": \"Samsung\"\n                }\n            ],\n            \"firstName\": \"vaibhav\",\n            \"cardInfo\": \"5554443322\"\n        }",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{orderEndpoint}}/order",
+							"host": [
+								"{{orderEndpoint}}"
+							],
+							"path": [
+								"order"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}

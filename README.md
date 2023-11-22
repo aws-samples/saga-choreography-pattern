@@ -11,17 +11,13 @@ The saga choreography pattern is Event Driven. The saga participants subscribe t
 
 The source code in this repo provides sample code for implementation of the saga choreography pattern on AWS. Below diagram depicts the architecture created by this source code.
 
-1. It has three services, namely - Order, Inventory and Payment services which are implemnted as Lambdas.
-2. Each service is exposed through an APIGateway endpoint.
+1. It has three microservices, namely - Order, Inventory and Payment services which are implemented as Lambdas.
+2. Each service is exposed through an APIGateway REST endpoint.
 3. Each service has a data store - implemnted as DynamoDB tables.
 4. Each services publishes messages and consumes them on Amazon EventBridge.
 
 ![Architecture Diagram](architecture.png)
 
-
-## License
-
-This library is licensed under the MIT-0 License. See the LICENSE file.
 
 ## Prerequisites
 
@@ -42,16 +38,23 @@ The CDK code in this repository creates the target architecture as shown in the 
 1. You need an AWS access key ID and secret access key for configuring the AWS Command Line Interface (AWS CLI).
 2. Clone the repo:
 ```bash
-git clone git@ssh.gitlab.aws.dev:vaibhvmi/saga-choreography.git
+git clone https://github.com/aws-samples/saga-choreography-pattern.git
 ```
 3. Start Docker or Docker Desktop.
-
-4. The cdk synth command causes the resources defined in the application to be translated into an AWS CloudFormation template. The cdk deploy command deploys the stacks into your AWS account. Run:
+4. Build the source code using npm command and bootstrap CDK in your chosen AWS region.
+5. The cdk synth command causes the resources defined in this repository to be translated into an AWS CloudFormation template. The cdk deploy command deploys the stacks into your AWS account. Run:
 ```bash
 cdk synth 
 cdk deploy
 ```
-5. CDK deploys the environment to AWS. You can monitor the progress using the CloudFormation console. The stack name shall be SagaChoreographyStack.
+6. CDK deploys the physical environment to AWS (including the microservices). You can monitor the progress using the CloudFormation console. The stack name shall be SagaChoreographyStack.
+
+7. Once the physical deployment of environment is completed, familiarize yourself with the REST endpoints and microservices in AWS Console. Use the Postman collection given in the repository to connect to the REST Endpoints and invoke APIs to intitate the transactions.
+8. You may use the DELETE API to invoke compensating transactions.
+
+## License
+
+This library is licensed under the MIT-0 License. See the LICENSE file.
 
 ## Security
 
