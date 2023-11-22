@@ -5,13 +5,13 @@ Saga design pattern is used to preserve data integrity in distributed transactio
 A saga consists of a sequence of local transactions. Each local transaction in a saga updates the database and initiates the next local transaction. If a transaction fails, the saga runs compensating transactions to revert the database changes made by the previous transactions.
 
 Saga design pattern has two variants - Choreography and Orchestration.
-The saga choreography pattern is Event driven. The saga participants subscribe to the events and act based on the event details. They coordinate among themselves over a messaging system and there is no central-hub or an orchestrator to coordinate the flow of transactions.
+The saga choreography pattern is Event Driven. The saga participants subscribe to the events and act based on the event details. They coordinate among themselves over a messaging system and there is no central-hub or an orchestrator to coordinate the flow of transactions.
 
 ## Architecture
 
-The source code in this repo provides sample code for the implementation of the saga choreography pattern on AWS. Below diagram depicts the architecture created by this source code.
+The source code in this repo provides sample code for implementation of the saga choreography pattern on AWS. Below diagram depicts the architecture created by this source code.
 
-1. Three Services - Order, Inventory and Payment - implemnted as Lambdas.
+1. It has three services, namely - Order, Inventory and Payment services which are implemnted as Lambdas.
 2. Each service is exposed through an APIGateway endpoint.
 3. Each service has a data store - implemnted as DynamoDB tables.
 4. Each services publishes messages and consumes them on Amazon EventBridge.
@@ -37,21 +37,21 @@ For this walkthrough, you need:
 
 ## Setting up the environment
 
-The CDK code in this repository creates teh target architecture as shown in the diagram. These include IAM roles, REST API using API Gateway, DynamoDB tables, the EventBridge event buses and Lambda functions.
+The CDK code in this repository creates the target architecture as shown in the above diagram. These include IAM roles, REST API on API Gateway, DynamoDB tables, Amazon EventBridge event buses and Lambda functions.
 
 1. You need an AWS access key ID and secret access key for configuring the AWS Command Line Interface (AWS CLI).
 2. Clone the repo:
 ```bash
 git clone git@ssh.gitlab.aws.dev:vaibhvmi/saga-choreography.git
 ```
-3. Start the Docker or Docker Desktop.
+3. Start Docker or Docker Desktop.
 
 4. The cdk synth command causes the resources defined in the application to be translated into an AWS CloudFormation template. The cdk deploy command deploys the stacks into your AWS account. Run:
 ```bash
 cdk synth 
 cdk deploy
 ```
-5. CDK deploys the environment to AWS. You can monitor the progress using the CloudFormation console. The stack name is SagaChoreographyStack.
+5. CDK deploys the environment to AWS. You can monitor the progress using the CloudFormation console. The stack name shall be SagaChoreographyStack.
 
 ## Security
 
