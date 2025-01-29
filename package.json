@@ -23,7 +23,7 @@
     "@aws-cdk/aws-apigateway": "^1.198.1",
     "@aws-cdk/aws-lambda": "^1.198.1",
     "@aws-cdk/core": "^1.198.1",
-    "aws-cdk-lib": "2.69.0",
+    "aws-cdk-lib": "2.177.0",
     "aws-xray-sdk": "^3.5.0",
     "cdk-nag": "^2.27.181",
     "constructs": "^10.0.0",
